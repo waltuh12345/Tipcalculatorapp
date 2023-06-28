@@ -1,0 +1,188 @@
+@use "./variables" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+$ff: "Space Mono", monospace;
+$regular: 400;
+$bold: 700;
+
+$light-mode: false;
+
+$onBg: #ffffff;
+$onSurface: #ffffff;
+$clr-secondary: #84ffa9;
+$err-text: #ef9a9a;
+
+$bg: #0b212f;
+$surface: #1c3546;
+$surface-secondary: #2a475b;
+$clr-primary: #8ccdff;
+
+@if $light-mode {
+  $bg: #ffffff;
+  $onBg: #121212;
+  $surface: #ffffff;
+  $surface-secondary: #ffffff;
+  $onSurface: #121212;
+  $clr-primary: #91cfff;
+  $clr-secondary: #84ffa9;
+}
+
+//=======FONTS=======//
+
+//====MIXIN=====//
+
+@mixin bg-gradient($clr1, $clr2) {
+  background: linear-gradient(to bottom, $clr1 0%, $clr2 100%);
+}
+
+@mixin get-color($clr, $key) {
+  color: map-get($clr, $key);
+}
+
+@mixin get-bg($clr, $key) {
+  background-color: map-get($clr, $key);
+}
+
+@mixin ff-title($fw: $medium) {
+  font-family: $ff-title;
+  font-weight: $fw;
+}
+@mixin ff($fw: $semi-bold) {
+  font-family: $ff;
+  font-weight: $fw;
+}
+
+@mixin icon($content, $fs, $pseudo) {
+  &::#{$pseudo} {
+    display: inline-block;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    content: "#{$content}";
+    font: var(--fa-font-solid);
+    font-size: $fs;
+  }
+}
+
+@mixin container($min1, $min2) {
+  width: min($min1, $min2);
+  margin-inline: auto;
+}
+
+@mixin flex($fd, $gap) {
+  display: flex;
+  flex-direction: $fd;
+  gap: $gap;
+}
+
+@mixin grid($gap) {
+  display: grid;
+  gap: $gap;
+}
+
+@mixin hover($property, $clr) {
+  @media (hover: hover) and (pointer: fine) {
+    transition: 0.6s;
+
+    &:hover {
+      #{$property}: $clr;
+    }
+  }
+}
+
+@mixin hoverScale($scale) {
+  @media (hover: hover) and (pointer: fine) {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale($scale);
+    }
+  }
+}
+
+//====STYLES=====//
+
+//! OPTIONAL
+:root {
+  font-size: 62.5%;
+}
+
+$fs: 18px;
+
+@mixin font-size($desktop: false) {
+  $heading: 2.3rem; // 1.3 * mobile fs;
+  $subheading: 2rem; // smaller than mobile heading;
+
+  @if $desktop {
+    $heading: 3.5rem; // window * 1.96;
+    $subheading: 3rem; // smaller than heading;
+  }
+
+  h1 {
+    font-size: $heading;
+  }
+
+  h2 {
+    font-size: $subheading;
+  }
+
+  button {
+    font-size: $subheading;
+  }
+}
+
+$brd: 0.6rem;
+$box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+  rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+%input-style {
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset,
+    rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+  // background-color: #ffffff;
+  background-color: #dff6ff;
+  color: #1e1e1e;
+  height: 4rem;
+  &:focus-within {
+    outline: 2px solid #ffcd80;
+  }
+}
+
+%input-style-icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem 0 1.5rem;
+  border-radius: $brd;
+
+  @mixin iconName($name, $clr) {
+    @include icon($name, 14px, before);
+
+    &::before {
+      color: $clr;
+    }
+  }
+
+  input {
+    width: 100%;
+    outline: none;
+    border: none;
+    height: inherit;
+    text-align: right;
+    background: none;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+@mixin input-icon($name, $clr) {
+  display: flex;
+  align-items: center;
+  @include icon($name, 18px, before);
+
+  &:before {
+    color: $clr;
+  }
+}

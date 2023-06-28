@@ -1,0 +1,200 @@
+@use "config" as *;
+@use "./variables" as *;
+body {
+  font-family: $ff;
+  background-color: $bg;
+  color: $onBg;
+  font-size: $fs;
+  @include font-size(false);
+}
+
+.col {
+  padding: 1.5rem 0;
+}
+
+label {
+  font-weight: $bold;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.err {
+  color: $err-text;
+  font-size: 12px;
+  opacity: 0;
+}
+
+#total-display,
+#tip-display {
+  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+button {
+  @include hoverScale(104%);
+  cursor: pointer;
+  font-weight: $bold;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px,
+    rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.container {
+  background-color: $surface;
+  @include container(86%, 500px);
+  border-radius: $brd;
+  @include flex(column, 3rem);
+  padding: 2rem;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
+  .sec1 {
+    .col1 {
+      padding-top: 0;
+      > div {
+        @extend %input-style;
+        @extend %input-style-icon;
+        @include input-icon($fa-var-sack-dollar, inherit);
+      }
+    }
+
+    .col2 {
+      input {
+        @extend %input-style;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+        font-weight: $bold;
+      }
+
+      button {
+        background-color: $clr-primary;
+        transition: background-color 0.6s, transform 0.6s;
+
+        &:focus-within {
+          background-color: darken($clr-primary, 15%);
+        }
+      }
+
+      .btn-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+
+        > * {
+          flex: 1 0 120px;
+          height: 4.5rem;
+          border: none;
+          border-radius: $brd;
+        }
+      }
+    }
+
+    .col3 {
+      > :first-child {
+        @include flex(row, 0);
+        align-items: center;
+        justify-content: space-between;
+      }
+      > :last-child {
+        @extend %input-style;
+        @extend %input-style-icon;
+        @include input-icon($fa-var-user, inherit);
+      }
+    }
+  }
+
+  .sec2 {
+    border-radius: $brd;
+    @include grid(1rem);
+
+    > div {
+      border-radius: 10px;
+      background-color: $surface-secondary;
+      padding: 1.8rem;
+      @include flex(column, 2rem);
+      box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+        rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    }
+
+    .wrapper {
+      @include grid(2rem);
+      > :first-child {
+        padding-top: 0;
+      }
+    }
+
+    .col {
+      @include flex(row, 1rem);
+      justify-content: space-between;
+      line-height: 1;
+      align-items: center;
+
+      > :first-child > :last-child {
+        font-size: 14px;
+      }
+    }
+
+    button {
+      //$clr: darken($clr-primary);
+      background-color: $clr-primary;
+      display: block;
+      width: 100%;
+      min-height: 4rem;
+      border: none;
+      border-radius: $brd;
+      font-size: 20px;
+      @include hover(background-color, darken($clr-primary, 10%));
+    }
+
+    label {
+      white-space: nowrap;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  body {
+    @include font-size(true);
+  }
+
+  .container {
+    width: min(90%, 760px);
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.5rem;
+
+    > .sec1 {
+      flex: 1 1 36rem;
+
+      .col2 {
+        .btn-wrapper > * {
+          flex: 1 0 30%;
+        }
+      }
+    }
+
+    > .sec2 {
+      flex: 0 1 30rem;
+
+      > div {
+        display: grid;
+        align-content: space-between;
+      }
+    }
+  }
+
+  #total-display,
+  #tip-display {
+    max-width: 120px;
+  }
+}

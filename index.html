@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/img/favicon-32x32.png"
+    />
+    <title>Tip calculator app</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css"
+      integrity="sha512-Z0kTB03S7BU+JFU0nw9mjSBcRnZm2Bvm0tzOX9/OuOuz01XQfOpa0w/N9u6Jf2f1OAdegdIPWZ9nIZZ+keEvBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="dist/main.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <section class="sec1">
+          <div class="col col1">
+            <label for="bill">Bill</label>
+            <div><input id="bill" name="bill" type="number" /></div>
+          </div>
+          <div class="col col2">
+            <label for="tip">Select Tip %</label>
+            <div class="btn-wrapper">
+              <button>5%</button>
+              <button>10%</button>
+              <button>15%</button>
+              <button>25%</button>
+              <button>50%</button>
+              <input type="text" placeholder="Custom" name="tip" id="tip" />
+            </div>
+          </div>
+          <div class="col col3">
+            <div>
+              <label for="number-of-people">Number of People</label>
+              <div class="err">Error Message</div>
+            </div>
+            <div>
+              <input
+                id="number-of-people"
+                name="number-of-people"
+                type="number"
+              />
+            </div>
+          </div>
+        </section>
+        <section class="sec2">
+          <div>
+            <div class="wrapper">
+              <div class="col">
+                <div>
+                  <label>Tip Amount</label>
+                  <div>/ person</div>
+                </div>
+                <h2 id="tip-display">$0.00</h2>
+              </div>
+              <div class="col">
+                <div>
+                  <label>Total</label>
+                  <div>/ person</div>
+                </div>
+                <h2 id="total-display">$0.00</h2>
+              </div>
+            </div>
+            <button id="reset-btn">RESET</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="js/wow.min.js"></script>
+    <script src="js/aniFunc.js"></script>
+    <script src="js/calc.js"></script>
+  </body>
+</html>
